@@ -4,8 +4,14 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const signupEmployee = async (req, res) => {
-  const { companyName, email, address, companyDescription, password } =
-    req.body;
+  const {
+    companyName,
+    companyLogo,
+    email,
+    address,
+    companyDescription,
+    password,
+  } = req.body;
 
   try {
     const employeeUserExist = await employee.find({ email });
@@ -22,7 +28,7 @@ const signupEmployee = async (req, res) => {
         email,
         companyDescription,
         address,
-        companyLogo: req.CImage,
+        companyLogo,
         password: hashedPassword,
         isEmployee: true,
       });
@@ -152,7 +158,7 @@ const getClientDetail = async (req, res) => {
 };
 
 const getClientUpdateUser = async (req, res) => {
-  const { jobID } = req.body;
+  const { jobID } = req.body.details;
 
   try {
     const userData = await client.findOne({ _id: req.clientID });

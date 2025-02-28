@@ -12,14 +12,6 @@ const loginSchema = Joi.object().keys({
   password: Joi.string().required().min(3),
 });
 
-const employee = Joi.object().keys({
-  companyName: Joi.string().required(),
-  companyDescription: Joi.string().required(),
-  email: Joi.string().email().required(),
-  address: Joi.string().required(),
-  password: Joi.string().required().min(3),
-});
-
 const clientSchema = Joi.object().keys({
   fullName: Joi.string().required(),
   email: Joi.string().email().required(),
@@ -34,11 +26,7 @@ const onlyPatchMethod = (req, res) =>
 
 routes
   .route("/api/register-employee")
-  .post(
-    validator.body(employee),
-    userFileCheck.fileCheck,
-    userController.signupEmployee
-  )
+  .post(userController.signupEmployee)
   .all(onlyPostMethod);
 
 routes
@@ -58,7 +46,7 @@ routes.get(
 );
 
 routes
-  .route("/api/client/update-User")
+  .route("/api/client/update-user")
   .patch(userAuth.checkClient, userController.getClientUpdateUser)
   .all(onlyPatchMethod);
 

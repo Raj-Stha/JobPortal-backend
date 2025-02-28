@@ -80,11 +80,7 @@ routes
 
 routes
   .route("/api/client/update-jobs")
-  .patch(
-    userAuth.checkClient,
-    fileCheck.pdfCheck,
-    jobController.getClientUpdateJob
-  )
+  .patch(userAuth.checkClient, jobController.getClientUpdateJob)
   .all(onlyPatchMethod);
 
 module.exports = routes;

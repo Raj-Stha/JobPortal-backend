@@ -299,8 +299,7 @@ const getSearchedJob = async (req, res) => {
 };
 
 const getClientUpdateJob = async (req, res) => {
-  const { fullName, jobID } = req.body;
-
+  const { fullName, jobID, CV } = req.body.details;
   try {
     const result = await jobModel.findOne({ _id: jobID });
 
@@ -308,7 +307,7 @@ const getClientUpdateJob = async (req, res) => {
       result.appliedCandidate.push({
         clientID: req.clientID,
         fullName: fullName,
-        cv: req.CV,
+        cv: CV,
       });
       result.save();
 
